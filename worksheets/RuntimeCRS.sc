@@ -1,4 +1,4 @@
-import com.escalatesoft.crs.CRSDef.CRSDefinitions.longitudeFirst
+import com.escalatesoft.crs.CRSType.CRSDefinitions.longitudeFirst
 import org.opengis.referencing.crs.CoordinateReferenceSystem
 import org.geotools.referencing.CRS
 

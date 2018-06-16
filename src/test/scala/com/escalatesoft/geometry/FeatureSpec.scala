@@ -1,7 +1,7 @@
 package com.escalatesoft.geometry
 
-import com.escalatesoft.crs.CRSDef
-import com.escalatesoft.crs.CRSDef.CRSDefinitions._
+import com.escalatesoft.crs.CRSType
+import com.escalatesoft.crs.CRSType.CRSDefinitions._
 import com.escalatesoft.tmap.TMap
 import org.scalatest.{FunSpec, Matchers}
 
@@ -96,7 +96,7 @@ class FeatureSpec extends FunSpec with Matchers {
 
   def countAttributes(feature: Feature[_, _, List[Any]]): Int = feature.attributes.size
 
-  def calcYield[CRS: CRSDef](feature: Feature[CRS, Coord2D[CRS], TMap[Flow with Duration]]): Feature[CRS, Coord2D[CRS], Yield] = {
+  def calcYield[CRS: CRSType](feature: Feature[CRS, Coord2D[CRS], TMap[Flow with Duration]]): Feature[CRS, Coord2D[CRS], Yield] = {
     Feature(feature.geometry, Yield(feature.attributes[Flow].amnt * feature.attributes[Duration].amnt))
   }
 }

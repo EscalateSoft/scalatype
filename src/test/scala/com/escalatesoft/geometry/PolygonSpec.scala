@@ -1,6 +1,6 @@
 package com.escalatesoft.geometry
 
-import com.escalatesoft.crs.CRSDef.CRSDefinitions._
+import com.escalatesoft.crs.CRSType.CRSDefinitions._
 import org.scalatest.{FunSpec, Matchers}
 
 class PolygonSpec extends FunSpec with Matchers {
@@ -38,10 +38,11 @@ class PolygonSpec extends FunSpec with Matchers {
         (0.0, 0.0), (0.0, 10.0), (10.0, 10.0), (10.0, 0.0), (0.0, 0.0)
       )
 
-      "poly.contains(Coord2D[EPSG_32616](5.0, 5.0))" shouldNot compile
       "poly.contains(Coord2D[EPSG_32616](5.0, 5.0))" shouldNot typeCheck
 
-      //poly.contains(Coord2D[EPSG_32616](5.0, 5.0))
+      "poly.contains(Coord2D[EPSG_32616](5.0, 5.0))" shouldNot compile
+
+      // poly.contains(Coord2D[EPSG_32616](5.0, 5.0))
     }
   }
 
@@ -71,10 +72,12 @@ class PolygonSpec extends FunSpec with Matchers {
 
       Polygon.areaSquareMeters(poly1) should be (100.0 +- 1e-6)
 
+      "Polygon.areaSquareMeters(poly2)" shouldNot typeCheck
+
       // Polygon.areaSquareMeters(poly2) should be (100.0 +- 1e-6)
 
+
       "Polygon.areaSquareMeters(poly2)" shouldNot compile
-      "Polygon.areaSquareMeters(poly2)" shouldNot typeCheck
     }
   }
 }
