@@ -1,3 +1,5 @@
+// compile errors in this script are intentional, for talk demo purposes
+
 val s1 = Set(1,2,3)
 val s2 = Set("Hello", "CRS", "Types")
 
