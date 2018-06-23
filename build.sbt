@@ -2,6 +2,13 @@ import Dependencies._
 
 val geotoolsVersion = "18.2"
 
+resolvers ++= Seq(
+  "java3d" at "http://maven.geotoolkit.org/",
+  "geosolutions" at "http://maven.geo-solutions.it/",
+  "osgeo" at "http://download.osgeo.org/webdav/geotools/",
+  "maven" at "http://central.maven.org/maven2/"
+)
+
 val geotools: Seq[ModuleID] = Seq(
   "org.geotools" % "geotools" % geotoolsVersion,
   "org.geotools" % "gt-cql" % geotoolsVersion,

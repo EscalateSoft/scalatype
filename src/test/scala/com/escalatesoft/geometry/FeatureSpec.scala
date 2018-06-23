@@ -19,6 +19,14 @@ class FeatureSpec extends FunSpec with Matchers {
       "Feature[EPSG_32616, Coord2D[EPSG_32615], Int](Coord2D[EPSG_32615](5.0, 5.0), 20)" shouldNot typeCheck
     }
 
+    it ("should allow a function to be mapped over the attributes") {
+      val feature: Feature[EPSG_32615, Coord2D[EPSG_32615], List[String]] =
+        Feature(Coord2D[EPSG_32615](5.0, 5.0), List("three", "strings"))
+
+      val feature2: Feature[EPSG_32615, Coord2D[EPSG_32615], List[Int]] =
+        feature.mapAttributes(attr => attr.map(_.length))
+    }
+
     it ("should allow covariant behavior in the attributes") {
       val feature: Feature[EPSG_32615, Coord2D[EPSG_32615], List[Int]] =
         Feature(Coord2D[EPSG_32615](5.0, 5.0), List(1, 2, 3))

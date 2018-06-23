@@ -10,7 +10,7 @@ abstract class GeometryType[CRS: CRSType] {
 
   protected def findTransformTo[NEW_CRS: CRSType]: MathTransform = {
     val newCRS = implicitly[CRSType[NEW_CRS]]
-    val transform = GCRS.findMathTransform(crs, newCRS.crs, true)
+    val transform = GCRS.findMathTransform(crs, newCRS.crs, false)
     transform
   }
 }

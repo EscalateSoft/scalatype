@@ -36,7 +36,6 @@ object CRSType {
     implicit val SOME_CRS: CRSType[SOME_CRS]
 
     override def toString: String = s"SomeCRS($SOME_CRS)"
-
     override def equals(obj: Any): Boolean = {
       obj match {
         case otherCRS: SomeCRS =>
@@ -44,8 +43,9 @@ object CRSType {
         case _ => false
       }
     }
-
-    override def hashCode(): Int = SOME_CRS.crs.##
+    override def hashCode(): Int = {
+      SOME_CRS.crs.##
+    }
   }
 
   trait SomeMeterCRS extends SomeCRS {
@@ -102,14 +102,14 @@ object CRSType {
     object EPSG_32619 extends MeterCRSType[EPSG_32619]
 
     // NAD83
-    case class EPSG_4269 private() extends CRSDef("EPSG_4269")
+    case class EPSG_4269 private() extends CRSDef("EPSG:4269")
     object EPSG_4269 extends AngleCRSType[EPSG_4269]
 
 
     private def crsTuple(crs: CRSType[_]): (String, CRSType[_]) =
       (crs.crsId, crs)
 
-    @volatile lazy val _registered: Map[String, CRSType[_]] =
+    lazy val _registered: Map[String, CRSType[_]] =
       Seq(
         // NAD83
         EPSG_4269,
