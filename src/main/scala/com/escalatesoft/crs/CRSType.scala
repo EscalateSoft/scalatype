@@ -105,6 +105,11 @@ object CRSType {
     case class EPSG_4269 private() extends CRSDef("EPSG:4269")
     object EPSG_4269 extends AngleCRSType[EPSG_4269]
 
+    object DisplayOnly {
+      case class EPSG_3857() extends CRSDef("EPSG:3857")
+      object EPSG_3857 extends CRSType[EPSG_3857]
+    }
+
 
     private def crsTuple(crs: CRSType[_]): (String, CRSType[_]) =
       (crs.crsId, crs)

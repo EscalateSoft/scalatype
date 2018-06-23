@@ -69,9 +69,10 @@ class FeatureSpec extends FunSpec with Matchers {
       featureWithFlowAndDuration.attributes[Flow].amnt should be (10.6 +- 1e-9)
       featureWithFlowAndDuration.attributes[Duration].amnt should be (2.5 +- 1e-9)
 
-      val featureWithYield = calcYield(featureWithFlowAndDuration)
+      val featureWithYield: Feature[EPSG_32615, Coord2D[EPSG_32615], TMap[FieldName with Flow with Duration with Yield]] =
+        featureWithFlowAndDuration.addAttr(calcYield(featureWithFlowAndDuration.attributes))
 
-      featureWithYield.attributes.amnt should be (26.5 +- 1e-9)
+      featureWithYield.attributes[Yield].amnt should be (26.5 +- 1e-9)
 
 
       val featureWithYield2: Feature[EPSG_32615, Coord2D[EPSG_32615], TMap[FieldName with Yield]] =
@@ -104,8 +105,8 @@ class FeatureSpec extends FunSpec with Matchers {
 
   def countAttributes(feature: Feature[_, _, List[Any]]): Int = feature.attributes.size
 
-  def calcYield[CRS: CRSType](feature: Feature[CRS, Coord2D[CRS], TMap[Flow with Duration]]): Feature[CRS, Coord2D[CRS], Yield] = {
-    Feature(feature.geometry, Yield(feature.attributes[Flow].amnt * feature.attributes[Duration].amnt))
+  def calcYield(attributes: TMap[Flow with Duration]): Yield = {
+    Yield(attributes[Flow].amnt * attributes[Duration].amnt)
   }
 }
 
